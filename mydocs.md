@@ -44,6 +44,8 @@ git push heroku
 heroku run python manage.py migrate
 heroku run python manage.py createsuperuser
 
+// check
+heroku run python manage.py check --deploy
 
 https://vinetcepage.herokuapp.com/ | https://git.heroku.com/vinetcepage.git
 // Run the collectstatic command for the first time to compile all the static file directories 
