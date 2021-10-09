@@ -35,7 +35,7 @@ totoLV7894*
 //
 
 heroku login
-
+sudo heroku login
 
 // Run the collectstatic command for the first time to compile all the static file directories 
 // and files into one self-contained unit suitable for deployment.

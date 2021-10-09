@@ -221,3 +221,12 @@ DJANGORESIZED_DEFAULT_KEEP_META = True
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'PNG'
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'PNG': ".png"}
 DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+
+
+
+# Heroku 
+import django_heroku
+django_heroku.settings(locals())
+
+#https://github.com/jacobian/dj-database-url/issues/107
+del DATABASES['default']['OPTIONS']['sslmode']
