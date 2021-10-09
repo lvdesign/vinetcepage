@@ -32,6 +32,9 @@ lvdesign
 laurent.vignaux@wanadoo.fr
 totoLV7894*
 
+//
+
+heroku login
 
 
 // Run the collectstatic command for the first time to compile all the static file directories 
@@ -47,3 +50,17 @@ https://fr.wikipedia.org/wiki/Viticulture_en_France
 
 //
 https://res.cloudinary.com/lvcloud/image/upload/v1624885333/vinslv/Capture_decran_2021-06-28_a_15.01.46_daj09h.png
+
+
+
+Here is a recap of what we’ve done so far:
+• add environment variables via environs[django]
+Chapter 16: Deployment 264
+• set DEBUG to False
+• set ALLOWED_HOSTS
+• use environment variable for SECRET_KEY
+• update DATABASES to use SQLite locally and PostgreSQL in production
+• configure static files
+• install whitenoise for static file hosting
+• install gunicorn for production web server
+These steps apply to Django deployments on any server or platform; they are not Herokuspecific.
