@@ -36,7 +36,16 @@ totoLV7894*
 
 heroku login
 sudo heroku login
+heroku config:set DISABLE_COLLECTSTATIC=1
 
+git push heroku
+
+//db
+heroku run python manage.py migrate
+heroku run python manage.py createsuperuser
+
+
+https://vinetcepage.herokuapp.com/ | https://git.heroku.com/vinetcepage.git
 // Run the collectstatic command for the first time to compile all the static file directories 
 // and files into one self-contained unit suitable for deployment.
 python manage.py collectstatic
