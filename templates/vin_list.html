@@ -1,0 +1,104 @@
+<!-- templates/article_list.html 
+
+object_list -->
+{% extends 'base.html' %}
+{% block title %}Liste des Vins{% endblock title %}
+
+{% block content %}
+
+
+<div class="row">
+
+    {% if vin_list %}
+  
+    {% for vin in vin_list %}
+   
+    <div class="col-mb-4">
+        <div class="card mb-4 shadow-sm">
+            <img src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ vin.image }}" 
+            alt="{{ vin.title }}"
+            width=300 height=300           
+            class="myImages img-fluid mx-auto d-block "
+            />
+        
+            <div class="card-body">
+                <h5 class="card-title"><a href="{{ vin.get_absolute_url }}">{{ vin.title }} </a></h5>
+                <span class="text-muted">by {{ vin.author }} | {{ vin.created | date }}</span>
+  
+                <ul class="list-group"><b>Région : </b>
+                    <li class="list-group-item"><a  href="{% url 'vins:category_detail' vin.category %}">{{ vin.category | upper }}</a></li></ul>
+        
+                <ul class="list-group"><b>Cépage :</b>
+                    {% for t in vin.tag.all %}
+                    <li class="list-group-item"><a href="{% url 'vins:tag_detail' t.slug %}">{{ t.name | capfirst }}</a> </li>     
+                    {% if not foorloop.last%}{% endif %}
+                    {% endfor %}
+                </ul>
+
+                <p>Prix :  {{ vin.price }} €</p>
+                <p>Boutique : {{ vin.boutique }}</p>
+                        
+                <p> {{ vin.score }} <i class="fa fa-glass" aria-hidden="true"></i></p>
+
+                <p>
+                    <a href="{% url 'vins:vin_edit' vin.slug %}">Edit</a> |
+                    <a href="{% url 'vins:vin_delete' vin.slug %}">Delete</a>  
+                </p>
+
+            {% if user.is_authenticated %}
+            <a href="#" onclick="favPost('{% url 'vins:vin_unfavorite' vin.id %}', {{vin.id}} );return false;" 
+            {% if vin.id not in favorites %} style="display: none;" {% endif %} 
+            id="favorite_heart_{{vin.id}}">
+            <span class="fa-stack" style="vertical-align: middle;">
+                <i class="fa fa-heart fa-stack-1x" style="color: rgb(255, 0, 0);"></i>
+                <i class="fa fa-heart-o fa-stack-1x"></i>
+            </span>
+            </a>
+
+            <a href="#" onclick="favPost('{% url 'vins:vin_favorite' vin.id  %}', {{vin.id}} );return false;"
+            {% if vin.id in favorites %} style="display: none;" {% endif %} 
+            id="unfavorite_heart_{{vin.id}}">
+            <span class="fa-stack" style="vertical-align: middle;">
+                <i class="fa fa-heart fa-stack-1x" style="display: none; color: rgb(255, 0, 0);"></i>
+                <i class="fa fa-heart-o fa-stack-1x"></i>
+            </span>
+            </a>
+            <p>
+                <a href="{{ vin.get_absolute_url }}" class="btn btn-light">plus de details</a>
+            </p>
+            
+            </div><!-- End CardBody -->
+        
+            {% endif %}           
+    
+    </div> 
+
+    </div> <!-- End col-mb-4--> 
+    {% endfor %} 
+<!-- AVANT si error -->
+{% else %}
+<!-- si error -->
+<div class="col-mb-4"><p>ERROR pas de vins!!!</p></div>
+<!-- End- vinList -->
+{% endif %}
+<!-- ENDIF IfvinList END -->
+
+
+<script>
+    function favPost(url, vin_id) {
+        console.log('Requesting JSON');
+        $.post(url, {},  function(rowz){
+            console.log(url, 'finished');
+            $("#unfavorite_heart_"+vin_id).toggle();
+            $("#favorite_heart_"+vin_id).toggle();
+        }).fail(function(xhr) {
+            alert('Url failed with '+xhr.status+' '+url);
+        });
+    }
+    </script>
+
+
+
+</div><!-- END ROW -->
+
+{% endblock content %}

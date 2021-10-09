@@ -1,0 +1,41 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %} - Home {% endblock title %}
+
+
+{% block content %}   
+
+
+<div class="row" >
+    <div class="col-sm">
+        <p><a class="btn btn-primary btn-lg" href="{% url 'vins:vin_list' %}"
+            role="button">Tous les vins</a></p>
+      </div>
+    
+
+      <div class="col-sm">
+        {% if images %}
+        <div id="my_rotator" class="thumbnail">
+            {% for vin in images %}
+            <figure>
+                <img src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ vin.image }}" alt="{{ vin.title }}" class="myImages" width=300 height=300 />
+                <figcaption><b>{{ vin.title }}</b></figcaption>
+            </figure>          
+        {% endfor %}
+        </div>
+    {% endif %}
+      </div>
+      
+      <div class="col-sm">
+        <p>Hello</p>
+      </div>
+   
+
+
+
+
+
+</div><!-- END ROW -->
+
+{% endblock content %}

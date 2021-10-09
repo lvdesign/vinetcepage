@@ -1,0 +1,38 @@
+<!-- templates/tag_detail.html -->
+{% extends 'base.html' %}
+
+{% block title %} 
+Les vins de {{ tag.name | upper }}
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="vin-entry">
+  <h3>{{ tag.name | upper }}</h3>
+  <p>{{ tag.description_tag }}</p>
+
+  
+  <div>
+    <h3 class="font-weight-bold">
+    <small><b>Les vins sur le site :</b></small>
+    {% for tag in tag.tags.all %}   
+      <a href="{%  url 'vins:vin_detail' tag.slug %}">{{ tag.slug }} </a>
+    </h3>
+    {% if not foorloop.last%}{% endif %}
+    {% endfor %}
+  </div>
+
+  {% load vins_plus %}
+  <div class="list-group tag">
+    <p>Liste des cépages : 
+    {% get_tag_list %}
+    </p>
+  </div>
+
+  
+  <p><small><a href="{% url 'vins:vin_list' %}">Retour aux vins -></a></small></p>
+
+</div>
+
+{% endblock content %}

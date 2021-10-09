@@ -1,0 +1,41 @@
+<!-- templates/article_list.html object_list -->
+{% extends 'base.html' %}
+
+
+{% block title %} Les vins de {{ category.name | upper }}
+
+{% endblock title %}
+
+
+{% block content %}
+<h3>{{ category.name | upper  }} </h3>
+<p>{{ category.description_cat }}</p>
+
+
+<div class="vin-entry">
+  
+  <h3 property="v:name" class="entry-title fn">
+    <small><b>Les vins du sites :</b></small>
+    {% for cat in category.categories.all %}      
+          <a href="{%  url 'vins:vin_detail' cat.slug %}">{{ cat.slug}}</a>
+    {% endfor %}
+  </h3>
+
+    <!-- categories liste -->
+    {% load vins_plus %}
+    <div class="list-group category ">
+      <p>Liste des categories :
+        {% get_category_list %}
+      </p>
+    </div>
+
+
+    <p>
+      <small>
+        <a href="{% url 'vins:vin_list' %}">Retour aux vins -></a>
+      </small>
+    </p>
+
+</div><!-- ENDvin-entry-->
+
+{% endblock %}
