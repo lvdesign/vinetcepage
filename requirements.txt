@@ -14,11 +14,13 @@ dj3-cloudinary-storage==0.0.4
 Django==3.1.12
 django-allauth==0.42.0
 django-cache-url==3.2.3
+django-ckeditor==6.1.0
 django-crispy-forms==1.9.2
 django-debug-toolbar==3.2.1
 django-environ==0.4.5
 django-extensions==3.0.2
 django-heroku==0.0.0
+django-js-asset==1.2.2
 django-resized==0.3.11
 django-taggit==1.2.0
 djangorestframework==3.11.2
