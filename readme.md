@@ -1,6 +1,11 @@
 # Vin & Cépage
 
+Site de partage de conseils et de connaissances sur les vins français selon leurs cépages
 
-site django
 
-partage de conseils sur des des vins selon leur cepage
+Technologies :
+- django
+- bootstrap
+- heroku
+- cloudinary
+

@@ -9,17 +9,21 @@
 
 <div class="row" >
     <div class="col-sm">
+      <h2>Tous les vins</h2>
+        <p> Accedez à la liste complete des vins du site "Vin & Cépage" </p>
         <p><a class="btn btn-primary btn-lg" href="{% url 'vins:vin_list' %}"
             role="button">Tous les vins</a></p>
+         
       </div>
     
 
       <div class="col-sm">
+        <h2>Derniers vins…</h2>
         {% if images %}
         <div id="my_rotator" class="thumbnail">
             {% for vin in images %}
             <figure>
-                <img src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ vin.image }}" alt="{{ vin.title }}" class="myImages" width=300 height=300 />
+                <img src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ vin.image }}" alt="{{ vin.title }}" class="myImages"  height=300/>
                 <figcaption><b>{{ vin.title }}</b></figcaption>
             </figure>          
         {% endfor %}
@@ -28,6 +32,7 @@
       </div>
       
       <div class="col-sm">
+        <h2>Tendances</h2>
         <p>Hello</p>
       </div>
    

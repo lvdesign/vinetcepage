@@ -2,6 +2,7 @@
 from django.urls import path, reverse_lazy, reverse
 
 from . import views
+
 """
 from vins.views import (
     VinListView, 
@@ -44,5 +45,6 @@ urlpatterns +=[
     path('<int:pk>/favorite', views.AddFavoriteView.as_view(), name='vin_favorite'),
     path('<int:pk>/unfavorite', views.DeleteFavoriteView.as_view(), name='vin_unfavorite'),
 ]
+
 
 

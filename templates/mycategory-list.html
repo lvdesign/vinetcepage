@@ -1,10 +1,10 @@
 {% if cats %}
-{# cats  from return #}
+{# cats from return #}
 
 {% for c in cats %}
 <a href="{% url 'vins:category_detail'  c.slug %}" class="list-group-item color-{{ c.name }}" title="{{ c.name }}">
     {{ c.name| capfirst}}
-    
+</a>    
 {% endfor %}
 
 {% else %}

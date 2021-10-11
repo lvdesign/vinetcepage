@@ -88,9 +88,7 @@ class VinCreateView(LoginRequiredMixin, CreateView):
 
 
 
-# Category - region
-
-
+# Category -> region
 class CategoryListView(OwnerListView):
     ''' Category/Region liste '''
     model = Category
@@ -168,3 +166,5 @@ class DeleteFavoriteView(LoginRequiredMixin, View):
             pass
 
         return HttpResponse()
+
+

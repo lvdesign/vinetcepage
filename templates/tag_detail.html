@@ -10,28 +10,32 @@ Les vins de {{ tag.name | upper }}
 
 <div class="vin-entry">
   <h3>{{ tag.name | upper }}</h3>
-  <p>{{ tag.description_tag }}</p>
+  <p>{{ tag.description_tag | safe  }}</p>
 
   
-  <div>
-    <h3 class="font-weight-bold">
+  <div class="tag-entry">
+    
     <small><b>Les vins sur le site :</b></small>
     {% for tag in tag.tags.all %}   
-      <a href="{%  url 'vins:vin_detail' tag.slug %}">{{ tag.slug }} </a>
-    </h3>
+    <h3 class="entry-title fn font-weight-bold"> <a href="{%  url 'vins:vin_detail' tag.slug %}">{{ tag.slug }} </a></h3>
+    
     {% if not foorloop.last%}{% endif %}
     {% endfor %}
   </div>
 
+   <!-- Tags liste -->
   {% load vins_plus %}
   <div class="list-group tag">
-    <p>Liste des cépages : 
-    {% get_tag_list %}
-    </p>
+    <small><b>Liste des cépages : </b></small>
+    {% get_tag_list %}   
   </div>
 
   
-  <p><small><a href="{% url 'vins:vin_list' %}">Retour aux vins -></a></small></p>
+  <p>
+    <small>
+      <a href="{% url 'vins:vin_list' %}">Retour aux vins -></a>
+    </small>
+  </p>
 
 </div>
 

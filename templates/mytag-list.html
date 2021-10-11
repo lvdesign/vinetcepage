@@ -3,7 +3,7 @@
 {% for t in tags %}
 <a href="{% url 'vins:tag_detail'  t.slug %}" class="list-group-item color-{{ t.name }}" title="{{ t.name }}">
     {{ t.name|capfirst }}
-    
+</a>    
 {% endfor %}
 
 {% else %}

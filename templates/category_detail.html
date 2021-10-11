@@ -9,24 +9,24 @@
 
 {% block content %}
 <h3>{{ category.name | upper  }} </h3>
-<p>{{ category.description_cat }}</p>
+<p>{{ category.description_cat|safe }}</p>
 
 
-<div class="vin-entry">
+<div class="category-entry"> 
   
-  <h3 property="v:name" class="entry-title fn">
     <small><b>Les vins du sites :</b></small>
     {% for cat in category.categories.all %}      
-          <a href="{%  url 'vins:vin_detail' cat.slug %}">{{ cat.slug}}</a>
+    <h3 property="v:name" class="entry-title fn font-weight-bold"> <a href="{%  url 'vins:vin_detail' cat.slug %}">{{ cat.slug}}</a></h3>
+    {% if not foorloop.last%}{% endif %}
     {% endfor %}
-  </h3>
+</div>
 
     <!-- categories liste -->
     {% load vins_plus %}
     <div class="list-group category ">
-      <p>Liste des categories :
-        {% get_category_list %}
-      </p>
+      <small><b>Liste des categories :</b></small>
+        {% get_category_list %}    
+
     </div>
 
 

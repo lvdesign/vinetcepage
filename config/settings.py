@@ -51,7 +51,7 @@ INSTALLED_APPS = [
    
     'debug_toolbar',
     'cloudinary',
-    #'ckeditor',
+    'ckeditor',
     "crispy_forms",
     #"crispy_bootstrap5",
 

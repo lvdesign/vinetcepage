@@ -8,6 +8,8 @@ from django.template.defaultfilters import slugify
 from django.db.models import Count
 from django.utils import timezone
 
+# texte editor pour Category et Tag description
+from ckeditor.fields import RichTextField
 
 from django_resized import ResizedImageField
 # Create your models here.
@@ -38,7 +40,9 @@ class Category(models.Model):
     slug = models.SlugField(max_length=40, unique=True, null=True)
 
     # description categorie
-    description_cat = models.TextField(blank=True, null=True)
+    #description_cat = models.TextField(blank=True, null=True)
+    description_cat = RichTextField(blank=True, null=True)
+   
 
     def __str__(self):
         return self.name  
@@ -123,7 +127,9 @@ class Tag(models.Model):
         choices=TagChoice.choices,
         default=TagChoice.Merlot       
     )
-    description_tag = models.TextField(blank=True, null=True)
+
+    #description_tag = models.TextField(blank=True, null=True)
+    description = RichTextField(blank=True, null=True)
 
     slug = models.SlugField(max_length=30, unique=True, null=True)
 

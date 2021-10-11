@@ -1,5 +1,5 @@
 console.log('heello');
-
+/*
 // voir aussi https://www.a11ymatters.com/pattern/mobile-nav/
 // Nav action
 const hamburger = document.querySelector(".hamburger");
@@ -20,7 +20,7 @@ function closeMenu() {
     hamburger.classList.remove("active");
     navMenu.classList.remove("active");
 }
-
+*/
 // Rotation image
 
 (function(){
