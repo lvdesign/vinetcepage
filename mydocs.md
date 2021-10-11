@@ -43,6 +43,8 @@ git push heroku
 //db
 heroku run python manage.py migrate
 heroku run python manage.py createsuperuser
+adminLV
+vinetcepage
 
 // check
 heroku run python manage.py check --deploy
