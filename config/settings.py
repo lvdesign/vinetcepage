@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import environ
 import os
 
+import django_heroku
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,9 +32,11 @@ SECRET_KEY = env.str("MY_SECRET_KEY") # 'django-insecure-fkw=p&c6t0ujih0p9^l0ys3
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 #DEBUG = False
-DEBUG = env.bool("MY_DEBUG", default=False)
-
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+DEBUG =  False #env.bool("MY_DEBUG", default=False)
+PREPEND_WWW = True
+BASE_URL = "https://vinetcepage.herokuapp.com"
+#https://vinetcepage.herokuapp.com/
+ALLOWED_HOSTS = ['vinetcepage.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -225,8 +229,8 @@ DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 
 
 # Heroku 
-import django_heroku
+
 django_heroku.settings(locals())
 
 #https://github.com/jacobian/dj-database-url/issues/107
-#del DATABASES['default']['OPTIONS']['sslmode']
+del DATABASES['default']['OPTIONS']['sslmode']
