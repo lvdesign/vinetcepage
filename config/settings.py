@@ -32,11 +32,11 @@ SECRET_KEY = env.str("MY_SECRET_KEY") # 'django-insecure-fkw=p&c6t0ujih0p9^l0ys3
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 #DEBUG = False
-DEBUG =  False #env.bool("MY_DEBUG", default=False)
+DEBUG =  env.bool("MY_DEBUG", default=False)
 #PREPEND_WWW = True
 #BASE_URL = "https://vinetcepage.herokuapp.com"
 #https://vinetcepage.herokuapp.com/
-ALLOWED_HOSTS = ['vinetcepage.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
