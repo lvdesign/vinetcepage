@@ -233,4 +233,4 @@ DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 django_heroku.settings(locals())
 
 #https://github.com/jacobian/dj-database-url/issues/107
-del DATABASES['default']['OPTIONS']['sslmode']
+#del DATABASES['default']['OPTIONS']['sslmode']
