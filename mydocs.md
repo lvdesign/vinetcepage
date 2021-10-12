@@ -77,3 +77,17 @@ Chapter 16: Deployment 264
 • install whitenoise for static file hosting
 • install gunicorn for production web server
 These steps apply to Django deployments on any server or platform; they are not Herokuspecific.
+
+
+
+heroku ps
+
+heroku logs
+
+heroku logs --tail
+
+heroku ps:scale web=1
+
+//heroku ps:scale worker=1
+
+heroku run python manage.py check --deploy
