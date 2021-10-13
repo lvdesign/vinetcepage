@@ -234,3 +234,8 @@ django_heroku.settings(locals())
 
 #https://github.com/jacobian/dj-database-url/issues/107
 #del DATABASES['default']['OPTIONS']['sslmode']
+
+#SECURE_HSTS_SECONDS 
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

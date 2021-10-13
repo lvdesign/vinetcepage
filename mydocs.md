@@ -92,3 +92,6 @@ heroku ps:scale web=1
 //heroku ps:scale worker=1
 
 heroku run python manage.py check --deploy
+
+
+heroku config:set SECRET_KEY='django-insecure-fkw=p&c6t0ujih0p9^l0ys3ry77sbn)o-73z#!c&1y6k4nprr9'
