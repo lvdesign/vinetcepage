@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import environ
+
 import os
 
 import django_heroku
@@ -19,9 +19,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-from environs import Env # new
-env = Env() # new
-env.read_env() # new
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -31,8 +28,8 @@ SECRET_KEY = env.str("MY_SECRET_KEY", 'django-insecure-fkw=p&c6t0ujih0p9^l0ys3ry
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-#DEBUG = False
-DEBUG =  env.bool("MY_DEBUG", default=False)
+DEBUG = False
+#DEBUG =  env.bool("MY_DEBUG", default=False)
 #PREPEND_WWW = True
 #BASE_URL = "https://vinetcepage.herokuapp.com"
 #https://vinetcepage.herokuapp.com/
@@ -239,3 +236,20 @@ django_heroku.settings(locals())
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
