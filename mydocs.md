@@ -96,3 +96,10 @@ heroku run python manage.py check --deploy
 
 
 heroku config:set SECRET_KEY='django-insecure-fkw=p&c6t0ujih0p9^l0ys3ry77sbn)o-73z#!c&1y6k4nprr9'
+
+
+
+at=error code=H10 desc="App crashed" method=GET path="/" host=vinetcepage.herokuapp.com request_id=0e6424ec-dd1d-4031-a13e-6ae21dbd53af fwd="82.121.172.98" dyno= connect= service= status=503 bytes= protocol=https
+
+
+web: gunicorn config.wsgi --log-file -
