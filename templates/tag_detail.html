@@ -4,15 +4,24 @@
 {% block title %} 
 Les vins de {{ tag.name | upper }}
 {% endblock title %}
-
+{% load static %} 
 
 {% block content %}
 
-<div class="vin-entry">
-  <h3>{{ tag.name | upper }}</h3>
-  <p>{{ tag.description_tag | safe  }}</p>
+<picture>
+  <source srcset="{%  static 'img/cepage-vendanges.webp' %}" type="image/webp">
+  <img src="{%  static 'img/cepage-vendanges.jpg' %}" class="myImages img-fluid" alt="cepage">
+</picture>
 
-  
+<div class="jumbotron p-4 pmd-5 text-white bg-dark">
+  <div class="col-md-8 px-0">    
+    <h1 class="display-4 font-italic">{{ tag.name | upper  }} </h1>
+    <p class="lead my-3">{{ category.description_tag|safe }}</p>
+  </div>
+</div>
+
+<div class="vin-entry">
+   
   <div class="tag-entry">
     
     <small><b>Les vins sur le site :</b></small>

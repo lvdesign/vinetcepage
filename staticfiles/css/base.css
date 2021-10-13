@@ -6,13 +6,11 @@ body {
   .vin-template {
     padding: 3rem 1.5rem;  
   }
-  h5{ color:red !important}
       
   
   
   /* EFFET Fancy Images */
-  .myImages{
-      
+  .myImages{      
       -webkit-filter: grayscale(100%);
       filter: grayscale(100%);
       -webkit-transition: .3s ease-in-out;

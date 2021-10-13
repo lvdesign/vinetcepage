@@ -54,8 +54,9 @@ https://vinetcepage.herokuapp.com/ | https://git.heroku.com/vinetcepage.git
 // and files into one self-contained unit suitable for deployment.
 python manage.py collectstatic
 
-
-
+// identifier lien de depots
+git remote -v
+git remote rm heroku
 
 // doc cartes
 https://fr.wikipedia.org/wiki/Viticulture_en_France

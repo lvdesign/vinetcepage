@@ -18,7 +18,7 @@ from vins.utils import dump_queries
 
 
 # VIN
-class VinListView(ListView):
+class VinListView(OwnerListView):
     ''' Vins : liste, visible par tous'''
     model = Vin
     template_name = 'vin_list.html'
@@ -37,7 +37,7 @@ class VinListView(ListView):
         retval = render(request, self.template_name, ctx)
         return retval
 
-class VinDetailView(DetailView): # new
+class VinDetailView(OwnerDetailView): # new
     ''' Vins : detail visible par tous'''
     model = Vin
     template_name = 'vin_detail.html'
@@ -53,19 +53,34 @@ def rate_image(request):
     return JsonResponse({'success':'false'})
 
 # CRUD
-''' CRUD section des vins '''
+'''
+CRUD section des vins
+LoginRequiredMixin pour Creta, Update, Delete
+UserPassesTestMixin pour limiter user to Update et Delete
 
-class VinUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): # new
+'''
+class VinCreateView( OwnerCreateView): 
+    ''' Creer/editer vins: 
+    'title','slug','decription','price','boutique','tips','image','category','tag','score' '''    
+    model = Vin
+    template_name = 'vin_new.html'   
+    fields = 'title','slug','decription','price','boutique','tips','image','category','tag','score' #'__all__'   
+
+    def form_valid(self, form): # new
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class VinUpdateView(OwnerUpdateView): # new
     ''' Update vins '''
     model = Vin
-    fields = '__all__'
+    fields = 'title','slug','decription','price','boutique','tips','image','category','tag','score'
     template_name = 'vin_edit.html'
 
     def test_func(self): # new
         obj = self.get_object()
         return obj.author == self.request.user
 
-class VinDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView): # new
+class VinDeleteView(DeleteView): # new
     ''' Delete vins '''
     model = Vin
     template_name = 'vin_delete.html'
@@ -75,16 +90,7 @@ class VinDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView): # new
         obj = self.get_object()
         return obj.author == self.request.user
 
-class VinCreateView(LoginRequiredMixin, CreateView): 
-    ''' Creer/editer vins: 
-    'title','slug','decription','price','boutique','tips','image','category','tag','score' '''    
-    model = Vin
-    template_name = 'vin_new.html'   
-    fields = ('title','slug','decription','price','boutique','tips','image','category','tag','score' )   
 
-    def form_valid(self, form): # new
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
 
 
@@ -104,6 +110,17 @@ class CategoryDetailView(OwnerDetailView):
     ''' Category/Region details '''
     model = Category
     template_name = "category_detail.html"
+
+    def get_context_data(self, **kwargs):
+
+        toto = Category.objects.all()
+        #titi = Category.objects.filter('category').values()
+        titi = Category.objects.filter().values('name')
+
+        context = super(CategoryDetailView, self).get_context_data(**kwargs)
+        context['image'] = toto
+        context['test'] = titi
+        return context
 
     def get_queryset(self):
         return Category.objects.all()

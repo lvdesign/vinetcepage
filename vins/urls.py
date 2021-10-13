@@ -22,12 +22,13 @@ from vins.views import (
 app_name= 'vins'
 
 urlpatterns = [
-    path('new/', views.VinCreateView.as_view(), name='vin_new'), # new
-    path('<slug:slug>/edit/',views.VinUpdateView.as_view(), name='vin_edit'), 
+    path('new/', views.VinCreateView.as_view(success_url=reverse_lazy('vins:vin_list')), name='vin_new'), # new
+    path('<slug:slug>/edit/',views.VinUpdateView.as_view( success_url=reverse_lazy('vins:vin_list')), name='vin_edit'),     
+    path('<slug:slug>/delete/',views.VinDeleteView.as_view(success_url=reverse_lazy('vins:vin_list')), name='vin_delete'), # new
+
     path('<slug:slug>/',views.VinDetailView.as_view(), name='vin_detail'), 
-    path('<slug:slug>/delete/',views.VinDeleteView.as_view(), name='vin_delete'), # new
-    
     path('', views.VinListView.as_view(), name='vin_list'),
+
     #path('rate/', rate_image, name='rate-view'),
 ]
 

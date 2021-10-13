@@ -38,14 +38,19 @@ object_list -->
                 <p>Prix :  {{ vin.price }} €</p>
                 <p>Boutique : {{ vin.boutique }}</p>
                         
-                <p> {{ vin.score }} <i class="fa fa-glass" aria-hidden="true"></i></p>
+                <p><i class="fa fa-glass" aria-hidden="true"></i> {{ vin.score }} </p>
 
-                <p>
-                    <a href="{% url 'vins:vin_edit' vin.slug %}">Edit</a> |
-                    <a href="{% url 'vins:vin_delete' vin.slug %}">Delete</a>  
-                </p>
+            
+            {% if vin.author == user %}
+            <!-- auteur -->
+            <p>
+                <a href="{% url 'vins:vin_edit' vin.slug %}">Edit</a> |
+                <a href="{% url 'vins:vin_delete' vin.slug %}">Delete</a>  
+            </p>
+            {% endif %}
 
             {% if user.is_authenticated %}
+             <!-- user -->
             <a href="#" onclick="favPost('{% url 'vins:vin_unfavorite' vin.id %}', {{vin.id}} );return false;" 
             {% if vin.id not in favorites %} style="display: none;" {% endif %} 
             id="favorite_heart_{{vin.id}}">
@@ -63,13 +68,14 @@ object_list -->
                 <i class="fa fa-heart-o fa-stack-1x"></i>
             </span>
             </a>
+            {% endif %}
             <p>
-                <a href="{{ vin.get_absolute_url }}" class="btn btn-light">plus de details</a>
+                <a href="{{ vin.get_absolute_url }}" class="btn btn-light">plus de détails</a>
             </p>
             
             </div><!-- End CardBody -->
         
-            {% endif %}           
+                      
     
     </div> 
 

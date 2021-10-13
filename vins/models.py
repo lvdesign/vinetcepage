@@ -205,9 +205,7 @@ class Vin (models.Model):
 
     def get_absolute_url(self):
        return reverse('vins:vin_detail', kwargs={'slug': self.slug})
-        
     
-
     def save(self, *args, **kwargs):  # new
         if not self.slug:
             self.slug = slugify(self.title)

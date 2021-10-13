@@ -1,6 +1,6 @@
 <!-- templates/article_list.html object_list -->
 {% extends 'base.html' %}
-
+{% load static %} 
 
 {% block title %} Les vins de {{ category.name | upper }}
 
@@ -8,8 +8,32 @@
 
 
 {% block content %}
-<h3>{{ category.name | upper  }} </h3>
-<p>{{ category.description_cat|safe }}</p>
+
+​<picture>
+  <source srcset="{%  static 'img/graves.webp' %}" type="image/webp">
+  <img src="{%  static 'img/graves.jpg' %}" class="myImages img-fluid" alt="region">
+</picture>
+
+
+<div class="jumbotron p-4 pmd-5 text-white bg-dark">
+  {{ test }}
+  {{ image }}
+
+  {%  if test == category.name %}
+  OK
+  {%  else %}
+  NO
+  {%  endif %}
+ 
+  
+
+  <div class="col-md-8 px-0">
+    
+    <h1 class="display-4 font-italic">{{ category.name | upper  }} </h1>
+    <p class="lead my-3">{{ category.description_cat|safe }}</p>
+
+  </div>
+</div>
 
 
 <div class="category-entry"> 
