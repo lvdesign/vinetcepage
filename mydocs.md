@@ -17,6 +17,11 @@ $ python manage.py runserver
 env1/bin/python -m pip freeze > requirements.txt
 env2/bin/python -m pip install -r requirements.txt
 
+// 
+python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+
+
+
 python manage.py createsuperuser
 
 username : admin
@@ -104,6 +109,12 @@ at=error code=H10 desc="App crashed" method=GET path="/" host=vinetcepage.heroku
 
 web: gunicorn config.wsgi --log-file -
 
-
+web: gunicorn config.wsgi --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate
 
 at=error code=H10 desc="App crashed" method=GET path="/" host=vinetcepage.herokuapp.com request_id=7704a416-357b-4155-866a-c6e99fc182d5 fwd="82.121.172.98" dyno= connect= service= status=503 bytes= protocol=https
+
+
+
+python -c 'import secrets; print(secrets.token_urlsafe())'

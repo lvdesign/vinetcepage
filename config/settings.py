@@ -9,12 +9,19 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import environ
+#import environ
+from environs import Env
 import os
 
-env = environ.ENV(
+
+env = Env() # new
+env.read_env() # new
+'''
+env = environ.Env(
+    # set casting, default value
     DEBUG=(bool, False)
 )
+'''
 
 import django_heroku
 
@@ -23,19 +30,22 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+# str(BASE_DIR.joinpath('staticfiles')) # new
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('MY_SECRET_KEY')
+
+# Take environment variables from .env file
+#environ.Env.read_env(BASE_DIR, '.env')
+
+SECRET_KEY=env.str('SECRET_KEY') 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 #DEBUG = False
-DEBUG =  env('MY_DEBUG', default=False)
-#PREPEND_WWW = True
-#BASE_URL = "https://vinetcepage.herokuapp.com"
-#https://vinetcepage.herokuapp.com/
+DEBUG =  env.bool('DEBUG', default=False)
+
+
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 
@@ -129,19 +139,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 '''
 DATABASES = {
-    'default': env.dj_db_url('MY_DATABASE_URL')
-}
-'''
+    "default": env.dj_db_url("DATABASE_URL")
+}       
 
 
 
@@ -238,24 +246,3 @@ django_heroku.settings(locals())
 #https://github.com/jacobian/dj-database-url/issues/107
 #del DATABASES['default']['OPTIONS']['sslmode']
 
-#SECURE_HSTS_SECONDS 
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
-}
