@@ -9,11 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import environ
 import os
-from environs import Env # new
-env = Env() # new
-env.read_env() # new
+
+env = environ.ENV(
+    DEBUG=(bool, False)
+)
 
 import django_heroku
 
@@ -27,12 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str("MY_SECRET_KEY") # 'django-insecure-fkw=p&c6t0ujih0p9^l0ys3ry77sbn)o-73z#!c&1y6k4nprr9'
-
+SECRET_KEY = env('MY_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 #DEBUG = False
-DEBUG =  env.bool("MY_DEBUG", default=False)
+DEBUG =  env('MY_DEBUG', default=False)
 #PREPEND_WWW = True
 #BASE_URL = "https://vinetcepage.herokuapp.com"
 #https://vinetcepage.herokuapp.com/
@@ -129,17 +129,20 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 '''
 DATABASES = {
-    "default": env.dj_db_url("MY_DATABASE_URL")
+    'default': env.dj_db_url('MY_DATABASE_URL')
 }
+'''
+
 
 
 # Password validation
