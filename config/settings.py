@@ -31,8 +31,8 @@ SECRET_KEY = env.str("MY_SECRET_KEY") # 'django-insecure-fkw=p&c6t0ujih0p9^l0ys3
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = False
-#DEBUG =  env.bool("MY_DEBUG", default=False)
+#DEBUG = False
+DEBUG =  env.bool("MY_DEBUG", default=False)
 #PREPEND_WWW = True
 #BASE_URL = "https://vinetcepage.herokuapp.com"
 #https://vinetcepage.herokuapp.com/
@@ -129,7 +129,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -140,7 +140,7 @@ DATABASES = {
 DATABASES = {
     "default": env.dj_db_url("MY_DATABASE_URL")
 }
-'''
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

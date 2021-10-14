@@ -103,3 +103,7 @@ at=error code=H10 desc="App crashed" method=GET path="/" host=vinetcepage.heroku
 
 
 web: gunicorn config.wsgi --log-file -
+
+
+
+at=error code=H10 desc="App crashed" method=GET path="/" host=vinetcepage.herokuapp.com request_id=7704a416-357b-4155-866a-c6e99fc182d5 fwd="82.121.172.98" dyno= connect= service= status=503 bytes= protocol=https
