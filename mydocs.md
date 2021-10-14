@@ -45,6 +45,9 @@ heroku config:set DISABLE_COLLECTSTATIC=1
 
 git push heroku
 
+heroku config:set SECRET_KEY='$m5**lk!_v@98no9*+25kqaj5c%t&9zppb1!yk%fo(!41!!6+l'
+
+
 //db
 heroku run python manage.py migrate
 heroku run python manage.py createsuperuser
@@ -100,7 +103,7 @@ heroku ps:scale web=1
 heroku run python manage.py check --deploy
 
 
-heroku config:set SECRET_KEY='django-insecure-fkw=p&c6t0ujih0p9^l0ys3ry77sbn)o-73z#!c&1y6k4nprr9'
+
 
 
 
