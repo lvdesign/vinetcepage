@@ -157,26 +157,31 @@ class Tag(models.Model):
 
 
 
+
+
+
 class Vin (models.Model):
     ''' Vin  model lié à Categorie pour la region et Tag pour le cépage'''
     tag = models.ManyToManyField( Tag,  help_text='Selectionnez des cépages pour ce vin.',  related_name='tags')
     category = models.ForeignKey(to=Category, help_text='Selectionnez une region pour ce vin.', on_delete=models.CASCADE, related_name='categories')
     
     favorites = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Fav', related_name='favorite_vins')
+
+    comments = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Comment', related_name='vin_comments')
  
-#rating
+    #rating
     score = models.IntegerField(default = 0,
     validators=[
         MaxValueValidator(5),
         MinValueValidator(0)
     ]) #0 hasn't be rated yet
 
-    title = models.CharField(max_length=250, validators=[MinLengthValidator( 5, "PLus que 3 lettres")], unique=True)
+    title = models.CharField(max_length=250, validators=[MinLengthValidator( 3, "Le titre doit avoir plus de 3 caractères !")], unique=True)
     slug = models.SlugField(max_length=255,null=False, unique=True)
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='fav_vin_auteur')
     decription = models.TextField()
-    tips = models.CharField( max_length=141, validators=[MaxLengthValidator(142, "Le conseil ne doit pas dépasser 140 lettres !")] )
+    tips = models.CharField( max_length=141, validators=[MaxLengthValidator(141, "Le conseil ne doit pas dépasser 140 caractères !")] )
 
     #image = models.ImageField(upload_to='vinslv/', null=True, blank=True)
     # https://github.com/un1t/django-resized avec cloudinary media/vinslv/
@@ -195,7 +200,7 @@ class Vin (models.Model):
     )
 
 
-    boutique = models.CharField( max_length=141, validators=[MaxLengthValidator(142, "Boutique ne doit pas dépasser 140 lettres !")] , null=True, blank=True)
+    boutique = models.CharField( max_length=141, validators=[MaxLengthValidator(141, "Boutique ne doit pas dépasser 140 caractères !")] , null=True, blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -212,10 +217,30 @@ class Vin (models.Model):
         return super(Vin,self).save(*args, **kwargs)
 
 
+# Comment class
+class Comment(models.Model) :
+    text = models.TextField(
+        validators=[MinLengthValidator(1, "Commentaire doit être plus grand que 1 caractère. "), MaxLengthValidator(141, "Le commentaire ne doit pas dépasser 140 caractères !")]
+    )
+
+    vin = models.ForeignKey(Vin, on_delete=models.CASCADE )# related_name='comments'
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # Shows up in the admin list
+    def __str__(self):
+        if len(self.text) < 15 : return self.text
+        return self.text[:11] + ' ...'
+
+    #def get_absolute_url(self):
+        #return reverse('vin_detail')      
+
 
 # FAV
-''' Vin Favoris pour chaque Membre'''
 class Fav(models.Model) :
+    ''' Vin Favoris pour chaque Membre'''
     vin = models.ForeignKey( Vin, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,  related_name='favs_users')
 

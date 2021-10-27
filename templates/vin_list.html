@@ -6,15 +6,16 @@ object_list -->
 
 {% block content %}
 
+<div class="row align-items-start">
 
-<div class="row">
-
-    {% if vin_list %}
-  
+    {% if vin_list %}  
     {% for vin in vin_list %}
-   
-    <div class="col-mb-4">
-        <div class="card mb-4 shadow-sm">
+   <!--   col-mb-4  
+col-auto mb-3
+col-6 col-md-4-->
+    <div class="col-auto col-md-4 mb-5">
+<!--    mb-4 -->
+        <div class="card shadow-sm">
             <img src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ vin.image }}" 
             alt="{{ vin.title }}"
             width=300 height=300           
@@ -25,12 +26,12 @@ object_list -->
                 <h5 class="card-title"><a href="{{ vin.get_absolute_url }}">{{ vin.title }} </a></h5>
                 <span class="text-muted">by {{ vin.author }} | {{ vin.created | date }}</span>
   
-                <ul class="list-group"><b>Région : </b>
-                    <li class="list-group-item"><a  href="{% url 'vins:category_detail' vin.category %}">{{ vin.category | upper }}</a></li></ul>
+                <ul class="Nlist-group"><b>Région : </b>
+                    <li class="Nlist-group-item"><a  href="{% url 'vins:category_detail' vin.category %}">{{ vin.category | upper }}</a></li></ul>
         
-                <ul class="list-group"><b>Cépage :</b>
+                <ul class="Nlist-group"><b>Cépage :</b>
                     {% for t in vin.tag.all %}
-                    <li class="list-group-item"><a href="{% url 'vins:tag_detail' t.slug %}">{{ t.name | capfirst }}</a> </li>     
+                    <li class="Nlist-group-item"><a href="{% url 'vins:tag_detail' t.slug %}">{{ t.name | capfirst }}</a> </li>     
                     {% if not foorloop.last%}{% endif %}
                     {% endfor %}
                 </ul>
@@ -43,10 +44,12 @@ object_list -->
             
             {% if vin.author == user %}
             <!-- auteur -->
+            <hr>
             <p>
                 <a href="{% url 'vins:vin_edit' vin.slug %}">Edit</a> |
                 <a href="{% url 'vins:vin_delete' vin.slug %}">Delete</a>  
             </p>
+            <hr>
             {% endif %}
 
             {% if user.is_authenticated %}
@@ -72,6 +75,8 @@ object_list -->
             <p>
                 <a href="{{ vin.get_absolute_url }}" class="btn btn-light">plus de détails</a>
             </p>
+           
+           
             
             </div><!-- End CardBody -->
         

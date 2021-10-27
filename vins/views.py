@@ -1,20 +1,28 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin # new
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin # new
+
+from django.shortcuts import render, redirect, get_object_or_404 #mail
 
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 
 from vins.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 
-from django.urls import reverse_lazy
-from .models import Vin, Fav, Category, Tag
+from django.urls import reverse_lazy, reverse
+
+from .models import Vin, Comment, Fav, Category, Tag
+from vins.forms import CommentForm
 from django.http import JsonResponse
 
-from django.shortcuts import render, redirect, get_object_or_404 #mail
+
+#Search
+from django.http import HttpResponse
+from django.db.models import Q
+from django.contrib.humanize.templatetags.humanize import naturaltime
+
+
+#Test query
 from vins.utils import dump_queries
-
-
-
 
 
 # VIN
@@ -23,34 +31,67 @@ class VinListView(OwnerListView):
     model = Vin
     template_name = 'vin_list.html'
 
-    def get(self,request):
-        vin_list = Vin.objects.all()
-        print(vin_list)
+    def get(self, request):
+        strval = request.GET.get("search", False) 
+        #SEARCH
+        #vin_list = Vin.objects.all()
+        #print(vin_list)
 
+        if strval:
+            query= Q(title__contains=strval)
+            query.add(Q(decription__contains=strval), Q.OR)
+            vin_list = Vin.objects.filter(query).select_related().order_by('-updated')[:10]
+        else:
+            vin_list = Vin.objects.all().order_by('-updated')[:10]
+        
+        for obj in vin_list:
+            obj.natural_updated = naturaltime(obj.updated)[:10]
+
+        
+
+            
+        #FAV
         favorites = list()
         if request.user.is_authenticated:
             rows = request.user.favorite_vins.values('id')
             favorites= [ row['id'] for row in rows]
         print(favorites)
-        ctx = {'vin_list': vin_list, 'favorites': favorites}
+        
+        ctx = {'vin_list': vin_list, 'search': strval, 'favorites': favorites}
         #dump_queries()
-        retval = render(request, self.template_name, ctx)
+        
+        retval = render(request, self.template_name, ctx)        
         return retval
+
 
 class VinDetailView(OwnerDetailView): # new
     ''' Vins : detail visible par tous'''
     model = Vin
     template_name = 'vin_detail.html'
 
-def rate_image(request):
-    if request.method == 'POST':
-        el_id = request.POST.get('el_id')
-        val =request.POST.get('val')
-        obj = Vin.objects.get(id=el_id)
-        obj.score = val
-        obj.save()
-        return JsonResponse({'success':'true', 'score': val}, safe=False)
-    return JsonResponse({'success':'false'})
+    '''
+    def rate_image(request):
+        if request.method == 'POST':
+            el_id = request.POST.get('el_id')
+            val =request.POST.get('val')
+            obj = Vin.objects.get(id=el_id)
+            obj.score = val
+            obj.save()
+            return JsonResponse({'success':'true', 'score': val}, safe=False)
+        return JsonResponse({'success':'false'})
+    '''
+
+    # comment
+    '''
+    def get(self, request, pk) :
+        x = Vin.objects.get(id=pk)
+        print('x :::', x)
+       
+        comments = Comment.objects.filter(vin=x).order_by('-updated')
+        comment_form = CommentForm()
+        context = { 'vin' : x, 'comments': comments, 'comment_form': comment_form }
+        return render(request, self.template_name, context)
+    '''
 
 # CRUD
 '''
@@ -64,27 +105,34 @@ class VinCreateView( OwnerCreateView):
     'title','slug','decription','price','boutique','tips','image','category','tag','score' '''    
     model = Vin
     template_name = 'vin_new.html'   
-    fields = 'title','slug','decription','price','boutique','tips','image','category','tag','score' #'__all__'   
+    fields = 'title','slug','decription','price','boutique','tips','image','category','tag','score' #'__all__'  
+    success_url = reverse_lazy('vins:vin_list')
+    
 
     def form_valid(self, form): # new
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
 
 class VinUpdateView(OwnerUpdateView): # new
     ''' Update vins '''
     model = Vin
     fields = 'title','slug','decription','price','boutique','tips','image','category','tag','score'
     template_name = 'vin_edit.html'
+    success_url = reverse_lazy('vins:vin_detail')
 
     def test_func(self): # new
         obj = self.get_object()
         return obj.author == self.request.user
 
+
+
 class VinDeleteView(DeleteView): # new
     ''' Delete vins '''
     model = Vin
     template_name = 'vin_delete.html'
-    success_url = reverse_lazy('vin_list')
+    success_url = reverse_lazy('vin:vin_list')
 
     def test_func(self): # new
         obj = self.get_object()
@@ -151,6 +199,28 @@ class TagDetailView(OwnerDetailView):
 
     def get_queryset(self):
         return Tag.objects.all()
+
+
+
+# COMMENTS
+
+class CommentCreateView(LoginRequiredMixin, View):
+
+    def post(self, request, pk) :
+        f = get_object_or_404(Vin, id=pk)
+        print('f :::',f)
+        comment = Comment(text=request.POST['comment'], author=request.user, vin=f)
+        comment.save()
+        return redirect(reverse('vins:vin_detail', args=[pk]))
+
+class CommentDeleteView(OwnerDeleteView):
+    model = Comment
+    template_name = "vins/vin_comment_delete.html"
+
+    # https://stackoverflow.com/questions/26290415/deleteview-with-a-dynamic-success-url-dependent-on-id
+    def get_success_url(self):
+        vin = self.object.vin
+        return reverse('vins:vin_detail', args=[vin.id])
 
 
 

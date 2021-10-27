@@ -2,50 +2,47 @@
 {% extends 'base.html' %}
 
 {% block title %} 
-Les vins de {{ tag.name | upper }}
+Le cépage {{ tag.name | upper }}
 {% endblock title %}
 {% load static %} 
 
 {% block content %}
 
-<picture>
-  <source srcset="{%  static 'img/cepage-vendanges.webp' %}" type="image/webp">
-  <img src="{%  static 'img/cepage-vendanges.jpg' %}" class="myImages img-fluid" alt="cepage">
-</picture>
 
-<div class="jumbotron p-4 pmd-5 text-white bg-dark">
-  <div class="col-md-8 px-0">    
-    <h1 class="display-4 font-italic">{{ tag.name | upper  }} </h1>
-    <p class="lead my-3">{{ category.description_tag|safe }}</p>
-  </div>
-</div>
-
-<div class="vin-entry">
-   
-  <div class="tag-entry">
-    
-    <small><b>Les vins sur le site :</b></small>
-    {% for tag in tag.tags.all %}   
-    <h3 class="entry-title fn font-weight-bold"> <a href="{%  url 'vins:vin_detail' tag.slug %}">{{ tag.slug }} </a></h3>
-    
-    {% if not foorloop.last%}{% endif %}
-    {% endfor %}
+  <div class="col-md-8 px-0">
+    <h5 class="mb-0"><b>Le cépage</b></h5>     
+    <h1 class="display-1 font-italic mb-0">{{ tag.name | capfirst  }} </h1>
+    <p class="lead my-3">{{ tag.description|safe }}</p>
   </div>
 
-   <!-- Tags liste -->
+
+  <!-- liste des vins  par tag --> 
+  <div class="tag-entry mt-4">    
+    <h5><b>Les vins sur le site :</b></h5>
+      <div class="row">    
+      {% for tag in tag.tags.all %}
+      <div class="col-sm media mb-3"> 
+        <img class="align-self-start mr-2 myImages" src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ tag.image }}" alt="" width=50 >  
+        <h3 class="entry-title fn">
+          <a href="{%  url 'vins:vin_detail' tag.slug %}">{{ tag.slug }} </a>
+        </h3>
+      </div>    
+      {% if not foorloop.last%}{% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Tags liste -->
   {% load vins_plus %}
-  <div class="list-group tag">
-    <small><b>Liste des cépages : </b></small>
+  <div class="list-group tag mt-4">
+    <h5><b>Liste des cépages : </b></h5>
     {% get_tag_list %}   
   </div>
-
   
-  <p>
-    <small>
-      <a href="{% url 'vins:vin_list' %}">Retour aux vins -></a>
-    </small>
-  </p>
+  <!-- Retour liste -->
+  <div class="mt-4">
+    <a href="{% url 'vins:vin_list' %}" class="btn btn-outline-dark"> Retour aux vins </a>
+  </div>
 
-</div>
 
 {% endblock content %}

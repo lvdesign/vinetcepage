@@ -2,64 +2,47 @@
 {% extends 'base.html' %}
 {% load static %} 
 
-{% block title %} Les vins de {{ category.name | upper }}
+{% block title %} La région {{ category.name | upper }}
 
 {% endblock title %}
 
 
 {% block content %}
-
-​<picture>
-  <source srcset="{%  static 'img/graves.webp' %}" type="image/webp">
-  <img src="{%  static 'img/graves.jpg' %}" class="myImages img-fluid" alt="region">
-</picture>
-
-
-<div class="jumbotron p-4 pmd-5 text-white bg-dark">
-  {{ test }}
-  {{ image }}
-
-  {%  if test == category.name %}
-  OK
-  {%  else %}
-  NO
-  {%  endif %}
- 
   
 
   <div class="col-md-8 px-0">
-    
-    <h1 class="display-4 font-italic">{{ category.name | upper  }} </h1>
+    <h5 class="mb-0"><b>La région</b></h5>    
+    <h1 class="display-1 font-italic mt-0">{{ category.name | capfirst  }} </h1>
     <p class="lead my-3">{{ category.description_cat|safe }}</p>
-
   </div>
+
+
+<!-- liste des vins  par cat -->
+<div class="category-entry mt-4"> 
+  <h5><b>Les vins du sites :</b></h5>
+        <div class="row">          
+          {% for cat in category.categories.all %}  
+          <div class="col-sm media mb-3"> 
+            <img class="align-self-start mr-2 myImages" src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ cat.image }}" alt="" width=50 >
+
+            <h3 property="v:name" class="entry-title fn"> <a href="{%  url 'vins:vin_detail' cat.slug %}">{{ cat.slug}}</a></h3>        
+          </div>
+          {% if not foorloop.last%}{% endif %}
+          {% endfor %}    
+      </div>
+</div>
+
+<!-- categories liste -->
+{% load vins_plus %}
+<div class="list-group category mt-4">
+  <h5><b>Liste des categories :</b></h5>
+    {% get_category_list %} 
 </div>
 
 
-<div class="category-entry"> 
-  
-    <small><b>Les vins du sites :</b></small>
-    {% for cat in category.categories.all %}      
-    <h3 property="v:name" class="entry-title fn font-weight-bold"> <a href="{%  url 'vins:vin_detail' cat.slug %}">{{ cat.slug}}</a></h3>
-    {% if not foorloop.last%}{% endif %}
-    {% endfor %}
+<!-- Retour liste -->    
+<div class="mt-4">
+    <a href="{% url 'vins:vin_list' %}" class="btn btn-outline-dark"> Retour aux vins </a>
 </div>
-
-    <!-- categories liste -->
-    {% load vins_plus %}
-    <div class="list-group category ">
-      <small><b>Liste des categories :</b></small>
-        {% get_category_list %}    
-
-    </div>
-
-
-    <p>
-      <small>
-        <a href="{% url 'vins:vin_list' %}">Retour aux vins -></a>
-      </small>
-    </p>
-
-</div><!-- ENDvin-entry-->
 
 {% endblock %}

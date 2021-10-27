@@ -61,6 +61,7 @@ heroku run python manage.py check --deploy
 https://vinetcepage.herokuapp.com/ | https://git.heroku.com/vinetcepage.git
 // Run the collectstatic command for the first time to compile all the static file directories 
 // and files into one self-contained unit suitable for deployment.
+
 python manage.py collectstatic
 
 // identifier lien de depots
@@ -121,3 +122,39 @@ at=error code=H10 desc="App crashed" method=GET path="/" host=vinetcepage.heroku
 
 
 python -c 'import secrets; print(secrets.token_urlsafe())'
+
+
+
+
+// comments
+
+
+
+
+
+
+         {# comment #}
+        
+        {% if user.is_authenticated %}
+        <br clear="all"/>
+        <p>
+        {% load crispy_forms_tags %}
+        <form method="post" action="{% url 'vins:vin_comment_create' vin.id %}">
+            {% csrf_token %}
+            {{ comment_form|crispy }}
+        <input type="submit" value="Submit">
+        <input type="submit" value="All Forums" onclick="window.location.href='{% url 'vins:vin_list' %}';return false;">
+        </form>
+        </p>
+        {% endif %}
+
+        {% for comment in comments %}
+        <p> {{ comment.text }} 
+        ({{ comment.updated_at }})
+        {% if user == comment.author %}
+        <a href="{% url 'vins:vin_comment_delete' comment.id %}"><i class="fa fa-trash"></i></a>
+        {% endif %}
+        </p>
+        {% endfor %}
+
+        {# comment #}

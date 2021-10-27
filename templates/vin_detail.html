@@ -8,36 +8,44 @@ https://res.cloudinary.com/lvcloud/image/upload/v1633592831/media/vinslv/basket_
    <div class="col-sm">
     <img src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ vin.image }}" alt="{{ vin.title }}" class="align-self-start mr-3 myImages"   width=300 />
 
-   </div>
-   
+   </div>  
         
         <div class="col-sm media-body">
-            <h5 class="mt-0 ">{{ vin.title }}</h5>
+            <h1 class="mt-0 card-title">{{ vin.title }}</h1>
             <p>by {{ vin.author }} | {{ vin.created | date }}</p>
             <p>{{ vin.decription }}</p>
             
-            <p>Région: <a href="{% url 'vins:category_detail' vin.category %}">{{ vin.category }}</a></p>
-            <p>Cépage: 
+            <p><b>Région :</b> <a href="{% url 'vins:category_detail' vin.category %}">{{ vin.category | capfirst}}</a></p>
+            <ul><b>Cépage :</b> 
                 {% for t in vin.tag.all %}
-                    <a href="{% url 'vins:tag_detail' t.slug %}">{{ t.name | capfirst }}</a>      
+                    <li><a href="{% url 'vins:tag_detail' t.slug %}">{{ t.name | capfirst }}  </a>    </li>  
                     {% if not foorloop.last%}{% endif %}
-                    {% endfor %}        
-            </p>
+                {% endfor %}        
+            </ul>
         
-            <li> {{ vin.score }} <i class="fa fa-glass" aria-hidden="true"></i></li>
+            <p> {{ vin.score }} <i class="fa fa-glass" aria-hidden="true"></i></p>
+          
+
+            {% if vin.author == user %}
             <hr>
+            <!-- auteur -->
             <p>
                 <a href="{% url 'vins:vin_edit' vin.slug %}">Edit</a> |
                 <a href="{% url 'vins:vin_delete' vin.slug %}">Delete</a>
             </p>
             <hr>
+            {% endif %}
+           
             <p>
                 <a href="{% url 'vins:vin_list' %}" class="btn btn-light"> Retour aux vins </a>
             </p>
+         
+        </div> 
 
-        </div>    
         
+
        
+ 
     
     </div>
 
