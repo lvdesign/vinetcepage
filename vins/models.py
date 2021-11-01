@@ -167,7 +167,7 @@ class Vin (models.Model):
     
     favorites = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Fav', related_name='favorite_vins')
 
-    comments = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Comment', related_name='vin_comments')
+    comments = models.ManyToManyField(settings.AUTH_USER_MODEL,  related_name='vin_comments')
  
     #rating
     score = models.IntegerField(default = 0,

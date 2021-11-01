@@ -59,6 +59,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic', # new
     'django.contrib.staticfiles',
+    'django.contrib.sites', # new
+    'django.contrib.sitemaps', # new 
+    'django.contrib.humanize',
 
 
     # mid
@@ -74,6 +77,8 @@ INSTALLED_APPS = [
     'pages',
     'vins',
 ]
+
+SITE_ID = 1 # new for sitemap
 
 AUTH_USER_MODEL = 'accounts.CustomUser' # new
 
@@ -228,7 +233,7 @@ EMAIL_USE_TLS = True
 
 
 
-# Django resize
+# Django resize image
 DJANGORESIZED_DEFAULT_SIZE = [300, 300]
 DJANGORESIZED_DEFAULT_CROP = ['middle', 'center']
 DJANGORESIZED_DEFAULT_QUALITY = 75

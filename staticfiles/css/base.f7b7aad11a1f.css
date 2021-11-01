@@ -16,7 +16,7 @@ font-family: 'Roboto', sans-serif;
 font-family: 'Playfair Display', serif;
 */
 .newH1{
-  font-size: 9.5rem;
+  font-size: 10rem;
   line-height: .9;
 }
 @media (max-width: 575.98px) { 
@@ -25,27 +25,17 @@ font-family: 'Playfair Display', serif;
   }
 }
 
-/* si mot trop long -> coupe*/
-.overF{
-  overflow-wrap: break-word;
-}
-
-
 p {font-family: 'Roboto', sans-serif; font-weight: 400;}
 
 p strong { font-weight: bold;}
   
 b {font-family: 'Oswald', sans-serif;font-weight: 700;}
 
-h1, h3, h5, h6, nav .navbar-brand {font-family: 'Playfair Display', serif; font-weight: 400; }
+h1, h3, h5, nav .navbar-brand {font-family: 'Playfair Display', serif; font-weight: 400;}
 
 h2 { font-family: 'Roboto', sans-serif; font-weight: 400;}
 
-/*commentaire*/
-h6{font-size: 2rem;}
 
-/* txt description*/
-h4 {font-family: 'Playfair Display', serif; font-weight: 400; font-style: italic; line-height: 1.5;}
 
 
 /* New style*/  
@@ -56,14 +46,15 @@ ul > li {
     list-style: none;
     text-decoration: none;
 }
-/* access */
 a.nav-link:hover{ color: rgb(145, 20, 20) !important;}
+
 .container a { color: rgb(145, 20, 20) !important;}
 
-/* title */
-h5, .card-title{ font-size: 3rem;}
-
-
+.card-title{
+    
+    /*font-family: Georgia, 'Times New Roman', Times, serif;
+    text-transform: uppercase;*/
+}
   
 /* EFFET Fancy Images */
   .myImages{      

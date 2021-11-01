@@ -32,10 +32,10 @@ urlpatterns = [
     #path('rate/', rate_image, name='rate-view'),
 ]
 
-urlpatterns +=[   
-
-    path('<slug:slug>/comment', views.CommentCreateView.as_view(), name='vin_comment_create'),
-    path('comment/<int:pk>/delete',views.CommentDeleteView.as_view(success_url=reverse_lazy('vin_list')), name='vin_comment_delete'),
+# vins/(?P<slug>[-a-zA-Z0-9_]+)/comment/(?P<pk>[0-9]+)/delete$
+urlpatterns +=[  
+    path('<slug:slug>/comment/', views.CommentCreateView.as_view(), name='vin_comment_create'),
+    path('comment/<int:pk>/delete',views.CommentDeleteView.as_view(), name='vin_comment_delete'),
 ]
 
 urlpatterns +=[     

@@ -23,15 +23,15 @@ col-6 col-md-4-->
             />
         
             <div class="card-body">
-                <h5 class="card-title"><a href="{{ vin.get_absolute_url }}">{{ vin.title }} </a></h5>
+                <h5 class="mt-0 card-title"><a href="{{ vin.get_absolute_url }}">{{ vin.title }} </a></h5>
                 <span class="text-muted">by {{ vin.author }} | {{ vin.created | date }}</span>
   
-                <ul class="Nlist-group"><b>Région : </b>
-                    <li class="Nlist-group-item"><a  href="{% url 'vins:category_detail' vin.category %}">{{ vin.category | upper }}</a></li></ul>
+                <ul><b>Région : </b>
+                    <li ><a  href="{% url 'vins:category_detail' vin.category %}">{{ vin.category | upper }}</a></li></ul>
         
-                <ul class="Nlist-group"><b>Cépage :</b>
+                <ul ><b>Cépage :</b>
                     {% for t in vin.tag.all %}
-                    <li class="Nlist-group-item"><a href="{% url 'vins:tag_detail' t.slug %}">{{ t.name | capfirst }}</a> </li>     
+                    <li ><a href="{% url 'vins:tag_detail' t.slug %}">{{ t.name | capfirst }}</a> </li>     
                     {% if not foorloop.last%}{% endif %}
                     {% endfor %}
                 </ul>

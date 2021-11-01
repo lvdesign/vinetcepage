@@ -82,16 +82,15 @@ class VinDetailView(OwnerDetailView): # new
     '''
 
     # comment
-    '''
-    def get(self, request, pk) :
-        x = Vin.objects.get(id=pk)
-        print('x :::', x)
-       
-        comments = Comment.objects.filter(vin=x).order_by('-updated')
+    
+    def get(self, request, slug=None) :
+        x = Vin.objects.get(slug=slug)
+        print('x :::', x)       
+        comments = Comment.objects.filter(vin=x).order_by('-updated_at')
         comment_form = CommentForm()
         context = { 'vin' : x, 'comments': comments, 'comment_form': comment_form }
         return render(request, self.template_name, context)
-    '''
+    
 
 # CRUD
 '''
@@ -206,21 +205,22 @@ class TagDetailView(OwnerDetailView):
 
 class CommentCreateView(LoginRequiredMixin, View):
 
-    def post(self, request, pk) :
-        f = get_object_or_404(Vin, id=pk)
+    def post(self, request, slug=None) :
+        f = get_object_or_404(Vin, slug=slug)
         print('f :::',f)
         comment = Comment(text=request.POST['comment'], author=request.user, vin=f)
         comment.save()
-        return redirect(reverse('vins:vin_detail', args=[pk]))
+        return redirect(reverse('vins:vin_detail', args=[slug]))
 
 class CommentDeleteView(OwnerDeleteView):
     model = Comment
-    template_name = "vins/vin_comment_delete.html"
+    template_name = "vin_comment_delete.html"
 
     # https://stackoverflow.com/questions/26290415/deleteview-with-a-dynamic-success-url-dependent-on-id
     def get_success_url(self):
         vin = self.object.vin
-        return reverse('vins:vin_detail', args=[vin.id])
+        return reverse('vins:vin_detail', args=[vin.slug])
+        #return reverse_lazy( 'vins:vin_detail', kwargs={'vin.slug': vin.slug })
 
 
 
