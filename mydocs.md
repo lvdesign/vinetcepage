@@ -55,7 +55,7 @@ heroku run python manage.py createsuperuser
 adminLV
 vinetcepage
 vinetcepage
-
+vinetcepage
 // check
 heroku run python manage.py check --deploy
 
