@@ -127,11 +127,11 @@ class Tag(models.Model):
         choices=TagChoice.choices,
         default=TagChoice.Merlot       
     )
-
+    slug = models.SlugField(max_length=30, unique=True, null=True)
     #description_tag = models.TextField(blank=True, null=True)
     description = RichTextField(blank=True, null=True)
 
-    slug = models.SlugField(max_length=30, unique=True, null=True)
+    
 
     def __str__(self):
         return self.name
@@ -167,7 +167,7 @@ class Vin (models.Model):
     
     favorites = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Fav', related_name='favorite_vins')
 
-    comments = models.ManyToManyField(settings.AUTH_USER_MODEL,  related_name='vin_comments')
+    comments = models.ManyToManyField(settings.AUTH_USER_MODEL,  related_name='vin_comment', through='Comment') #NEW as Fav
  
     #rating
     score = models.IntegerField(default = 0,
@@ -180,7 +180,7 @@ class Vin (models.Model):
     slug = models.SlugField(max_length=255,null=False, unique=True)
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='fav_vin_auteur')
-    decription = models.TextField()
+    description = models.TextField()
     tips = models.CharField( max_length=141, validators=[MaxLengthValidator(141, "Le conseil ne doit pas dépasser 140 caractères !")] )
 
     #image = models.ImageField(upload_to='vinslv/', null=True, blank=True)
@@ -224,7 +224,7 @@ class Comment(models.Model) :
     )
 
     vin = models.ForeignKey(Vin, on_delete=models.CASCADE )# related_name='comments'
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="comments_authors") #NEW
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

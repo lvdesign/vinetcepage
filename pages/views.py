@@ -28,4 +28,8 @@ class HomePageView(TemplateView):
 class AboutPageView(TemplateView):
     template_name = 'about.html'
 
+class OfflinePageView(TemplateView):
+    template_name = 'offline.html'
 
+#def offline(request):
+#    return render(request, 'polls/offline.html')

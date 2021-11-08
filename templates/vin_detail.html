@@ -15,7 +15,7 @@ https://res.cloudinary.com/lvcloud/image/upload/v1633592831/media/vinslv/basket_
 
             <p><b>by {{ vin.author }}</b> | {{ vin.created | date }}</p>
 
-            <h4 class="mb-4">{{ vin.decription }}</h4>
+            <h4 class="mb-4">{{ vin.description }}</h4>
 
             <p><b>Prix : </b> {{ vin.price }} €</p>
             <p><b>Boutique :</b> {{ vin.boutique }}</p>
@@ -49,7 +49,7 @@ https://res.cloudinary.com/lvcloud/image/upload/v1633592831/media/vinslv/basket_
         
         {% for comment in comments %}        
         <ul>        
-            <li><b> {{ comment.text }} </b><span><small>({{ comment.updated_at|naturaltime }})</small></span>
+            <li><b> {{ comment.text }} </b><i>par {{ comment.author }}</i> <span><small>({{ comment.updated_at|naturaltime }})</small></span>
                 {% if user == comment.author %}
                 <span><a href="{% url 'vins:vin_comment_delete' comment.id %}"><i class="fa fa-trash"></i></a></span>
                 {% endif %}

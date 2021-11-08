@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.contrib.sitemaps import GenericSitemap # new sitemap
 from django.contrib.sitemaps.views import sitemap # new sitemap
 from django.urls import path,include
-#from django.views.generic.base import TemplateView # new
+from django.views.generic.base import TemplateView # new
 
 from vins.models import Vin # sitemap
 info_dict = {
@@ -43,3 +43,12 @@ urlpatterns +=[
         {'sitemaps': {'blog': GenericSitemap(info_dict, priority=0.6)}},
         name='django.contrib.sitemaps.views.sitemap'),
 ]
+
+urlpatterns +=[
+    path('basicSW-vin.js', TemplateView.as_view(template_name='basicSW-vin.js', content_type='application/javascript'),
+    name='basicSW-vin.js',
+    ),
+
+]
+
+

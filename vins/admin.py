@@ -13,7 +13,7 @@ class CommentInline(admin.TabularInline): # new
 
 class VinAdmin(admin.ModelAdmin):
     search_fields= ['title']
-    fields = ('title', 'author','slug', 'decription', 'price', 'boutique', 'tips', 'image', 'category', 'tag','score')
+    fields = ('title', 'author','slug', 'description', 'price', 'boutique', 'tips', 'image', 'category', 'tag','score')
     prepopulated_fields = {'slug': ('title', )}
 
     inlines = [

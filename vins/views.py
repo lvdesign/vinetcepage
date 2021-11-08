@@ -14,6 +14,7 @@ from .models import Vin, Comment, Fav, Category, Tag
 from vins.forms import CommentForm
 from django.http import JsonResponse
 
+from django.views.generic.base import TemplateView
 
 #Search
 from django.http import HttpResponse
@@ -101,10 +102,10 @@ UserPassesTestMixin pour limiter user to Update et Delete
 '''
 class VinCreateView( OwnerCreateView): 
     ''' Creer/editer vins: 
-    'title','slug','decription','price','boutique','tips','image','category','tag','score' '''    
+    'title','slug','description','price','boutique','tips','image','category','tag','score' '''    
     model = Vin
     template_name = 'vin_new.html'   
-    fields = 'title','slug','decription','price','boutique','tips','image','category','tag','score' #'__all__'  
+    fields = 'title','slug','description','price','boutique','tips','image','category','tag','score' #'__all__'  
     success_url = reverse_lazy('vins:vin_list')
     
 
@@ -117,9 +118,9 @@ class VinCreateView( OwnerCreateView):
 class VinUpdateView(OwnerUpdateView): # new
     ''' Update vins '''
     model = Vin
-    fields = 'title','slug','decription','price','boutique','tips','image','category','tag','score'
+    fields = 'title','slug','description','price','boutique','tips','image','category','tag','score'
     template_name = 'vin_edit.html'
-    success_url = reverse_lazy('vins:vin_detail')
+    success_url = reverse_lazy('vins:vin_list')
 
     def test_func(self): # new
         obj = self.get_object()
@@ -131,7 +132,7 @@ class VinDeleteView(DeleteView): # new
     ''' Delete vins '''
     model = Vin
     template_name = 'vin_delete.html'
-    success_url = reverse_lazy('vin:vin_list')
+    success_url = reverse_lazy('vins:vin_list')
 
     def test_func(self): # new
         obj = self.get_object()
@@ -255,3 +256,7 @@ class DeleteFavoriteView(LoginRequiredMixin, View):
         return HttpResponse()
 
 
+"""Service worker for offline app"""
+class ServiceWorker(View):
+    template_name = "vins/sw.js"
+    content_type = "application/javascript"

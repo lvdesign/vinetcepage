@@ -54,4 +54,7 @@ urlpatterns +=[
 ]
 
 
-
+urlpatterns += [
+    
+    path('', views.ServiceWorker.as_view(), name="sw"),
+]
