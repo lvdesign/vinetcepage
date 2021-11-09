@@ -18,6 +18,5 @@
     "display": "standalone",
     "dir": "ltr",
     "lang": "fr",
-    "start_url": "/vins"
-
+    "start_url": "https://vinetcepage.herokuapp.com/"
 }
