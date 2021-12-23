@@ -15,31 +15,33 @@ col-auto mb-3
 col-6 col-md-4-->
     <div class="col-auto col-md-4 mb-5">
 <!--    mb-4 -->
-        <div class="card shadow-sm">
+        <div class="">
             <img src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ vin.image }}" 
             alt="{{ vin.title }}"
             width=300 height=300           
-            class="myImages img-fluid mx-auto d-block "
+            class="myImages img-fluid mx-auto d-block borderImage"
             />
         
             <div class="card-body">
-                <h5 class="mt-0 card-title"><a href="{{ vin.get_absolute_url }}">{{ vin.title }} </a></h5>
-                <span class="text-muted">by {{ vin.author }} | {{ vin.created | date }}</span>
-  
-                <ul><b>Région : </b>
-                    <li ><a  href="{% url 'vins:category_detail' vin.category %}">{{ vin.category | upper }}</a></li></ul>
-        
-                <ul ><b>Cépage :</b>
+                <h5 class="mt-0 card-title fond-blanc-bg"><a href="{{ vin.get_absolute_url }}">{{ vin.title }} </a></h5>
+                <p></p>
+                <span class="fond-noir-bg">by {{ vin.author }} | {{ vin.created | date }}</span>
+                <p></p>
+                <ul class="fond-noir-bg"><b>Région : </b>
+                    <li class="fond-blanc-bg"><a  href="{% url 'vins:category_detail' vin.category %}">{{ vin.category | upper }}</a></li></ul>
+        <p></p>
+                <ul class="fond-noir-bg" ><b>Cépage :</b>
                     {% for t in vin.tag.all %}
-                    <li ><a href="{% url 'vins:tag_detail' t.slug %}">{{ t.name | capfirst }}</a> </li>     
+                    <li class="fond-blanc-bg" ><a href="{% url 'vins:tag_detail' t.slug %}">{{ t.name | capfirst }}</a> </li>     
                     {% if not foorloop.last%}{% endif %}
                     {% endfor %}
                 </ul>
-
-                <p>Prix :  {{ vin.price }} €</p>
-                <p>Boutique : {{ vin.boutique }}</p>
-                        
-                <p><i class="fa fa-glass" aria-hidden="true"></i> {{ vin.score }} </p>
+                <p></p>
+                <p class="fond-noir-bg" ><b>Prix : </b> {{ vin.price }} €</p>
+                <p></p>
+                <p class="fond-noir-bg"><b>Boutique : </b>{{ vin.boutique }}</p>
+                <p></p>       
+                <p class="fond-blanc-bg" ><b>Score:  </b> {{ vin.score }}<i class="fa fa-glass" aria-hidden="true"></i> </p>
 
             
             {% if vin.author == user %}
@@ -53,6 +55,7 @@ col-6 col-md-4-->
             {% endif %}
 
             {% if user.is_authenticated %}
+            <p></p>
              <!-- user -->
             <a href="#" onclick="favPost('{% url 'vins:vin_unfavorite' vin.id %}', {{vin.id}} );return false;" 
             {% if vin.id not in favorites %} style="display: none;" {% endif %} 
@@ -71,7 +74,9 @@ col-6 col-md-4-->
                 <i class="fa fa-heart-o fa-stack-1x"></i>
             </span>
             </a>
+            
             {% endif %}
+            <p></p>
             <p>
                 <a href="{{ vin.get_absolute_url }}" class="btn btn-light">plus de détails</a>
             </p>

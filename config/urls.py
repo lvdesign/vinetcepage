@@ -20,6 +20,9 @@ from django.contrib.sitemaps.views import sitemap # new sitemap
 from django.urls import path,include
 from django.views.generic.base import TemplateView # new
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from vins.models import Vin # sitemap
 info_dict = {
     'queryset': Vin.objects.all(),
@@ -49,6 +52,6 @@ urlpatterns +=[
     name='basicSW-vin.js',
     ),
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

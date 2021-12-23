@@ -1,5 +1,25 @@
 cd /Users/laurentvignaux/django_docs/venv-recettes-vinsetcepage 
 
+---------------------
+
+Twitter
+lvdesign2020@gmail.com
+0633892756
+Vin&cepage2022LV
+@CepageVin
+
+API Key
+j94vAx6BnT5nB5BAzUOshVNKe
+
+API Key Secret
+xTfZrDp9vblxXerHV4vt7ZpZVQPJoLHqtBnqn1iZdtxspLV7rL
+
+Bearer Token
+AAAAAAAAAAAAAAAAAAAAAJViXQEAAAAABacxGDKMEL61uInRgN1MQuCRJeg%3DuwPaTgXmijnOkZWGwPUPDVNhDgEqasKde5Bv1RKwUnwyZXNp5e
+
+---------------------
+
+
 $ python3 -m venv myvenv
 
 
