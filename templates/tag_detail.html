@@ -12,7 +12,7 @@ Le cépage {{ tag.name | upper }}
   <div class="col-md-9 px-0">
     <h5 class="mb-0"><b>Le cépage</b></h5>     
     <h1 class="display-1 font-italic mb-0 overF" >{{ tag.name | capfirst  }} </h1>
-    <p class="lead my-3">{{ tag.description|safe }}</p>
+    <p class="lead my-3 fond-blanc-bg">{{ tag.description|safe }}</p>
   </div>
 
 
@@ -23,7 +23,7 @@ Le cépage {{ tag.name | upper }}
       {% for tag in tag.tags.all %}
       <div class="col-sm media mb-3"> 
         <img class="align-self-start mr-2 myImages" src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ tag.image }}" alt="" width=50 >  
-        <h3 class="entry-title fn">
+        <h3 class="entry-title fn fond-blanc-bg">
           <a href="{%  url 'vins:vin_detail' tag.slug %}">{{ tag.slug }} </a>
         </h3>
       </div>    
@@ -41,7 +41,7 @@ Le cépage {{ tag.name | upper }}
   
   <!-- Retour liste -->
   <div class="mt-4">
-    <a href="{% url 'vins:vin_list' %}" class="btn btn-outline-dark"> Retour aux vins </a>
+    <a href="{% url 'vins:vin_list' %}" class="btn btn-light"> Retour aux vins </a>
   </div>
 
 

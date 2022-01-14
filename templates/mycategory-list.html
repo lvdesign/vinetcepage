@@ -2,7 +2,7 @@
 {# cats from return #}
 
 {% for c in cats %}
-<a href="{% url 'vins:category_detail'  c.slug %}" class="color-{{ c.name }}" title="{{ c.name }}">
+<a href="{% url 'vins:category_detail'  c.slug %}" class="color-{{ c.name }} cat-block" title="{{ c.name }}">
     {{ c.name| capfirst}}
 </a>    
 {% endfor %}

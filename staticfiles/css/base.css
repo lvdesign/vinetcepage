@@ -15,10 +15,52 @@ font-family: 'Oswald', sans-serif
 font-family: 'Roboto', sans-serif;
 font-family: 'Playfair Display', serif;
 */
+.bg-white{
+  color:white;
+}
+
 .newH1{
   font-size: 9.5rem;
   line-height: .9;
+  color:white;
+  text-shadow: 2px 2px #000;
 }
+.Ital-Play-Font{
+ font-style: italic;
+ font-family: 'Playfair Display', serif;
+}
+
+.home-bg{
+  text-shadow: 1px 1px aliceblue;
+}
+
+
+/* 
+Fancy Wine Text 
+*/
+
+.fond-blanc-bg, .fond-blanc-bg + p, #div_id_comment label{
+background-color: aliceblue;
+display:inline;
+}
+
+.fond-noir-bg{
+  color:white;
+  background-color: black ;
+  display:inline;
+}
+.borderImage{
+  border:10px black solid;
+}
+
+.tag a, .category a {
+  color: white;
+  font-weight: 800;
+  }
+
+/* End Fancy Wine Text */
+
+
 @media (max-width: 575.98px) { 
   .newH1{
     font-size: 5rem;
@@ -66,16 +108,15 @@ h5, .card-title{ font-size: 3rem;}
 
 /* HOME 
 anna-kaminova-ckjuMXBLu7o-unsplash
+https://stackoverflow.com/questions/39769469/the-way-to-use-background-image-in-css-files-with-django
 */
+
 .backImage {
-  border:2px dotted green; padding: 2rem;
-  background-image: url("/staticfiles/img/anna-kaminova.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  /*border:2px dotted green; 
+  padding: 2rem;*/
+  background-image: url("/static/img/anna-kaminova.jpg");  
   background-size: cover;
 }
-
 
    
 /* EFFET Fancy Images */
@@ -95,7 +136,8 @@ anna-kaminova-ckjuMXBLu7o-unsplash
   #my_rotator {
       width: auto;
       height: 350px;	
-      border: 1px solid #ccc;
+      
+      background-color: black;
   }
   #my_rotator figure {
       display: none;

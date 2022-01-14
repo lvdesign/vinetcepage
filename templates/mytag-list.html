@@ -1,7 +1,7 @@
 {% if tags %}
 
 {% for t in tags %}
-<a href="{% url 'vins:tag_detail'  t.slug %}" class="color-{{ t.name }}" title="{{ t.name }}">
+<a href="{% url 'vins:tag_detail'  t.slug %}" class="color-{{ t.name }} fond-blanc-bg-a"  title="{{ t.name }}">
     {{ t.name|capfirst }}
 </a>    
 {% endfor %}
