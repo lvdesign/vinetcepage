@@ -19,19 +19,18 @@ col-6 col-md-4-->
 <!--    mb-4 -->
       
         
-            <div class="card-body">
-                <div class="anime-image">
-                    <a href="{{ vin.get_absolute_url }}">
+            <div class="card-body">                
+                <a href="{{ vin.get_absolute_url }}">
                         <img src="https://res.cloudinary.com/lvcloud/image/upload/v1624885333/{{ vin.image }}" 
                         alt="{{ vin.title }}"
                         width=300 height=300           
                         class="myImages img-fluid mx-auto d-block borderImage"
                         />       
-                        <h5 class="mt-0 card-title fond-blanc-bg fond-padding">
+                        <h5 class="mt-0 fond-blanc-bg fond-title-padding">
                             {{ vin.title }} 
                         </h5>
-                    </a>
-                </div>
+                </a>
+               
                 <p></p>
                 <span class="fond-noir-bg fond-padding">
                     by {{ vin.author }} | {{ vin.created | date }}</span>

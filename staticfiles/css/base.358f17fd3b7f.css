@@ -146,7 +146,7 @@ https://stackoverflow.com/questions/39769469/the-way-to-use-background-image-in-
 .backImage {
   /*border:2px dotted green; 
   padding: 2rem;*/
-  background-image: url("/static/img/anna-kaminova.jpg");  
+  background-image: url("/static/img/anna-kaminova.2888edb2d65d.jpg");  
   background-size: cover;
 }
 

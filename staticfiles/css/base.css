@@ -34,10 +34,6 @@ font-family: 'Playfair Display', serif;
   text-shadow: 1px 1px aliceblue;
 }
 
-.myheart{
-  color:red;
-}
-
 /* 
 Fancy Wine Text 
 */
@@ -51,11 +47,15 @@ background-color: aliceblue;
 display:inline;
 }
 
+/* Effet textes & bandeaux */
 .fond-padding{
-  padding: .5em;
+  padding: .5em;  
 }
-
-
+.fond-title-padding {
+  padding: .5rem;
+  line-height: 1.5;
+  
+ }
 .fond-noir-bg{  
   color:white;
   background-color: black ;
@@ -64,6 +64,7 @@ display:inline;
 .borderImage{
   border:10px black solid;
 }
+
 
 .tag a, .category a {
   color: white;
@@ -96,7 +97,7 @@ h1, h3, h5, h6, nav .navbar-brand {font-family: 'Playfair Display', serif; font-
 h2 { font-family: 'Roboto', sans-serif; font-weight: 400;}
 
 /*commentaire*/
-h6{font-size: 2rem;}
+h6 {font-size: 2rem;}
 
 /* txt description*/
 h4 {font-family: 'Playfair Display', serif; font-weight: 400; font-style: italic; line-height: 1.5;}
@@ -135,8 +136,6 @@ a.nav-link:hover{
 
 .container a { color: rgb(145, 20, 20) !important;}
 
-/* title */
-h5, .card-title{ font-size: 3rem;}
 
 
 /* HOME 
