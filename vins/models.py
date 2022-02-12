@@ -40,8 +40,8 @@ class Category(models.Model):
     slug = models.SlugField(max_length=40, unique=True, null=True)
 
     # description categorie
-    #description_cat = models.TextField(blank=True, null=True)
-    description_cat = RichTextField(blank=True, null=True)
+    description_cat = models.TextField(blank=True, null=True)
+    #description_cat = RichTextField(blank=True, null=True)
    
 
     def __str__(self):
@@ -128,8 +128,8 @@ class Tag(models.Model):
         default=TagChoice.Merlot       
     )
     slug = models.SlugField(max_length=30, unique=True, null=True)
-    #description_tag = models.TextField(blank=True, null=True)
-    description = RichTextField(blank=True, null=True)
+    description_tag = models.TextField(blank=True, null=True)
+    #description = RichTextField(blank=True, null=True)
 
     
 

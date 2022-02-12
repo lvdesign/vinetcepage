@@ -34,17 +34,29 @@ font-family: 'Playfair Display', serif;
   text-shadow: 1px 1px aliceblue;
 }
 
+.myheart{
+  color:red;
+}
 
 /* 
 Fancy Wine Text 
 */
+.fa-glass{
+  color:red;
+}
 
-.fond-blanc-bg, .fond-blanc-bg + p, #div_id_comment label{
+.fond-blanc-bg,  
+#div_id_comment label{
 background-color: aliceblue;
 display:inline;
 }
 
-.fond-noir-bg{
+.fond-padding{
+  padding: .5em;
+}
+
+
+.fond-noir-bg{  
   color:white;
   background-color: black ;
   display:inline;
@@ -99,7 +111,28 @@ ul > li {
     text-decoration: none;
 }
 /* access */
-a.nav-link:hover{ color: rgb(145, 20, 20) !important;}
+a.nav-link{  
+  text-decoration: none;
+  transition-property: text-decoration;
+  transition-duration: 0.5s;
+  transition-delay: 0.5s;
+  transition-timing-function: ease;
+}
+a.nav-link:hover{ 
+  color: rgb(145, 20, 20) !important;
+  text-decoration: underline;
+}
+
+/* Animation Logo*/
+.navbar-brand .my-logo{
+  width:30px;
+  height:30px;
+  transition: transform 0.2s ease-in-out;
+}
+.navbar-brand:hover .my-logo{
+  transform: rotate(-360deg);
+}
+
 .container a { color: rgb(145, 20, 20) !important;}
 
 /* title */
@@ -126,11 +159,11 @@ https://stackoverflow.com/questions/39769469/the-way-to-use-background-image-in-
       -webkit-transition: .3s ease-in-out;
       transition: .3s ease-in-out;
   }
-  .myImages:hover {
+   .myImages:hover {
       -webkit-filter: grayscale(0);
       filter: grayscale(0);
   }
-  
+
   
 /* Home page Rotator action */
   #my_rotator {

@@ -1,5 +1,6 @@
 <!-- templates/base.html -->
 {% load static %} 
+{% load vins_plus %}
 {% load humanize %}
 <!doctype html>
 <html lang="fr">
@@ -35,7 +36,7 @@
 <!-- Nav -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white rounded">
   <a class="navbar-brand" href="{% url 'home' %}">
-    <img src="{% static '/favicon-32x32.png' %}" alt="Vins & Cépages" width="30" height="30" class="d-inline-block align-top"> Vins & Cépages
+    <img src="{% static '/favicon-32x32.png' %}" alt="Vins & Cépages" width="30" height="30" class="d-inline-block align-top my-logo"> Vins & Cépages
   </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,6 +93,8 @@
   
   <div class="vin-template">
     {% block content %}
+   
+
     {% endblock content %}
   </div>  
   
@@ -109,6 +112,9 @@
     <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-muted">About</a></li>
     </ul>
     <p class="text-center text-muted">&copy; 2021 <a href="https://lvdesign.github.io/mylvdesign/" alt="LVdesign Studio">LVdesign Studio</a></p>
+    <p class="text-center text-muted">Vins & cépages comptent {% total_vins %} vins proposés.</p>
+
+    
 </footer>
 
 
